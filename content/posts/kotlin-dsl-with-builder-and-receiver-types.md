@@ -191,17 +191,17 @@ end
 ```
 
 Notice how the name of the table is passed into the function as an initial argument,
-and how afterwards the other parameters are set using an inline function (in Ruby they call
-code blocks).
+and how afterwards the other parameters are set using an inline function (in Ruby they
+call them code blocks).
 
 # The Cherry on Top: Receiver Types
 
-Kotlin has one more surprise for us: [receiver types](https://kotlinlang.org/docs/lambdas.html#function-literals-with-receiver).
+Kotlin has one more surprise for us: [function receiver types](https://kotlinlang.org/docs/lambdas.html#function-literals-with-receiver).
 These are more properly called, in the language's parlance, _function literals with receiver_, and work as follows:
 
 1.  You declare the function as having, e.g., the type `A.(X, Y) -> B`
 2.  You write your lambdas in the client code: they take two arguments of type X and Y, and return type B. Moreover, there is
-    an implicit environmental variable of type X that can be accessed using just a bare function call. So, if X is a string,
+    an implicit environmental variable of type A that can be accessed using just a bare function call. So, if A is a string,
     you will have access to the `length` field just by just using the unqualified identifier (like a variable).
 3.  You call the code in the service with `function.invoke(a, x, y)` or, like an extension method, with `a.function(x,y)`
 
