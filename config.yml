@@ -15,8 +15,8 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: "João N. Matos - Blog"
-  description: "My name is João Nuno Matos. I enjoy backend web dev and SQL. I hope to understand CSS and ML one day."
+  title: "João N. Matos"
+  description: "My name is João Nuno Matos."
   keywords: [Blog]
   author: "João N. Matos"
   # author: ["Me", "You"] # multiple authors

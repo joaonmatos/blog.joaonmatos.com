@@ -51,9 +51,9 @@ class JsonScraper(
 }
 ```
 
-However, to actually write a quick script or program to use this API is not as fun
+However, actually writing a quick script or program using this API is not as fun
 as we had hoped. After all, we need to get the files and URLs, build the lists on
-our own, and pass them into the lists like this:
+our own, and pass them into the constructor like this:
 
 ```kt
 val scraper = JsonScraper(
@@ -76,8 +76,8 @@ used often is the Builder pattern. If we go and consult a reference page about i
 for example [this one](https://refactoring.guru/design-patterns/builder), we can see
 that the intent and problem statements pretty much match our own.
 
-We basically introduce a new object, called a builder, that lets us build our more
-complex object step by step. Let's try to implement it in the most traditional, Java-y
+We introduce a new object, called a builder, that lets us build our more complex
+object step by step. Let's try to implement it in the most traditional, Java-y
 way first.
 
 ```kt
@@ -124,18 +124,18 @@ val scraper = Builder(query)
     .build()
 ```
 
-This construction is also more incremental in nature, so we can apply it for cases where
+This construction is also more incremental in nature, so we can apply it in cases where
 we receive a stream of options (`urls.forEach { builder.withUrl(it) }`) or when we are
 receiving commands from a terminal UI.
 
 # Improving the Pattern with Lambdas
 
-This can work alright in many cases already, but there is a use case where this pattern
+This can already work well in many cases, but there is a use case where this pattern
 might not work well enough as is.
 
 Let's imagine that we have a smart part of our code that preconfigures the builder
 with certain parameters, but afterwards still wants to yield back the control to the
-user to set certain parameters by themselves. Then, we end up in the awkward situation
+user to set certain parameters manually. In that case, we end up in the awkward situation
 of having a half-done builder sent into our code, which we have to finish, build, and
 send back into the code. Something like:
 
@@ -148,9 +148,9 @@ val scraper = AiAssitedScraper(config)
 ```
 
 This involves a lot of boilerplate code on the user's end. Luckily, we can use first-class
-functions for simplifying this API. What if we just pass in a function that modifies the builder
-at will, and the smart function takes care of the instantiation, preconfiguring and building for
-us?
+functions to simplify this API. What if we just pass in a function that modifies the builder
+at will, and the second-order function takes care of the instantiation, preconfiguring and
+building for us?
 
 ```
 fun AiAssistedScraper.buildScraper(
@@ -174,7 +174,7 @@ val scraper = AiAssistedScraper.buildScraper {
 
 **Much simpler!**
 
-This pattern is used extensively. For example, for building database migrations on Ruby on Rails:
+This pattern is used extensively in the wild. For example, for building database migrations on Ruby on Rails:
 
 ```rb
 # From https://guides.rubyonrails.org/getting_started.html#database-migrations
@@ -191,20 +191,21 @@ end
 ```
 
 Notice how the name of the table is passed into the function as an initial argument,
-and how afterwards the other parameters are set using an inline function.
+and how afterwards the other parameters are set using an inline function (in Ruby they call
+code blocks).
 
 # The Cherry on Top: Receiver Types
 
 Kotlin has one more surprise for us: [receiver types](https://kotlinlang.org/docs/lambdas.html#function-literals-with-receiver).
 These are more properly called, in the language's parlance, _function literals with receiver_, and work as follows:
 
-1.  You declare the function as having the type `A.(X, Y) -> B`
+1.  You declare the function as having, e.g., the type `A.(X, Y) -> B`
 2.  You write your lambdas in the client code: they take two arguments of type X and Y, and return type B. Moreover, there is
-    an implicit environment variable of type X that can be accessed using just a bare function call. So if X is a string,
-    you will have access to `length` as a variable, by just using the identifier as is.
-3.  You call the code in the service with `function.invoke(a, x, y)` or with like an extension method with `a.function(x,y)`
+    an implicit environmental variable of type X that can be accessed using just a bare function call. So, if X is a string,
+    you will have access to the `length` field just by just using the unqualified identifier (like a variable).
+3.  You call the code in the service with `function.invoke(a, x, y)` or, like an extension method, with `a.function(x,y)`
 
-This can make things even easier, as we don't need to include an explicit builder parameter in our lambda.
+This can make using the API even easier, as we don't need to include an explicit builder parameter in our lambda.
 
 So how does it work in practice? Let's just build on our code from before and write a simple function:
 
