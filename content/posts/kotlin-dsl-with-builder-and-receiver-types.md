@@ -11,7 +11,7 @@ ShowPostNavLinks: true
 We use DSLs everywhere. Every language has different patterns, so today I wanted to
 share a fun Kotlin pattern that you can use for builders in your embedded DSL.
 
-# A Convoluted Example
+## A Convoluted Example
 
 Let's say that we are building a scraper today to help us scrape all the passwords off
 an unprotected admin page in a website. The admins have access to a lot of JSON endpoints
@@ -67,9 +67,9 @@ For small, relatively homogeneous classes without big constructors this might be
 good enough (and in those cases: great! YAGNI), but in some others we might want a
 more straightforward way of managing complex object constructors.
 
-# In comes the Builder
+## In comes the Builder
 
-_Note: if you are familiar with the Builder pattern you can skip this section_
+> _Note: if you are familiar with the Builder pattern you can skip this section_
 
 I am not the biggest fan of design patterns, but a relatively simple one that can be
 used often is the Builder pattern. If we go and consult a reference page about it,
@@ -116,7 +116,7 @@ val scraper = JsonScraper(
 
 We can just ignore the URL option all together:
 
-```
+```kt
 val scraper = Builder(query)
     .withFile(file1)
     .withFile(file2)
@@ -128,7 +128,7 @@ This construction is also more incremental in nature, so we can apply it in case
 we receive a stream of options (`urls.forEach { builder.withUrl(it) }`) or when we are
 receiving commands from a terminal UI.
 
-# Improving the Pattern with Lambdas
+## Improving the Pattern with Lambdas
 
 This can already work well in many cases, but there is a use case where this pattern
 might not work well enough as is.
@@ -152,7 +152,7 @@ functions to simplify this API. What if we just pass in a function that modifies
 at will, and the second-order function takes care of the instantiation, preconfiguring and
 building for us?
 
-```
+```kt
 fun AiAssistedScraper.buildScraper(
     manualAdjustments: (ConfigBuilder) -> Unit
 ) : AiAssitedScraper {
@@ -164,7 +164,7 @@ fun AiAssistedScraper.buildScraper(
 
 Now the user only needs to focus on the manual adjustments:
 
-```
+```kt
 val scraper = AiAssistedScraper.buildScraper {
     builder -> builder
         .manualAdjustmentX()
@@ -194,16 +194,16 @@ Notice how the name of the table is passed into the function as an initial argum
 and how afterwards the other parameters are set using an inline function (in Ruby they
 call them code blocks).
 
-# The Cherry on Top: Receiver Types
+## The Cherry on Top: Receiver Types
 
 Kotlin has one more surprise for us: [function receiver types](https://kotlinlang.org/docs/lambdas.html#function-literals-with-receiver).
 These are more properly called, in the language's parlance, _function literals with receiver_, and work as follows:
 
-1.  You declare the function as having, e.g., the type `A.(X, Y) -> B`
-2.  You write your lambdas in the client code: they take two arguments of type X and Y, and return type B. Moreover, there is
-    an implicit environmental variable of type A that can be accessed using just a bare function call. So, if A is a string,
-    you will have access to the `length` field just by just using the unqualified identifier (like a variable).
-3.  You call the code in the service with `function.invoke(a, x, y)` or, like an extension method, with `a.function(x,y)`
+1. You declare the function as having, e.g., the type `A.(X, Y) -> B`
+2. You write your lambdas in the client code: they take two arguments of type X and Y, and return type B. Moreover, there is
+   an implicit environmental variable of type A that can be accessed using just a bare function call. So, if A is a string,
+   you will have access to the `length` field just by just using the unqualified identifier (like a variable).
+3. You call the code in the service with `function.invoke(a, x, y)` or, like an extension method, with `a.function(x,y)`
 
 This can make using the API even easier, as we don't need to include an explicit builder parameter in our lambda.
 

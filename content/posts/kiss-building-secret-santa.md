@@ -10,7 +10,7 @@ Web Services. But this post is quick and fun. And I'll be memeing Amazon's
 [Leadership Principles](https://www.amazon.jobs/en/principles)™️ along the way,
 as a homage.
 
-------------------------------------------------------
+---
 
 Okay, let's get started and set the scene: every year, my family gets together
 for Chrismas eve, and a tradition that we have, since we are so many, is to do a
@@ -25,18 +25,18 @@ participating, it was getting unwieldy to draw names for everyone, since it
 needed to be done, by hand, on an ocasion where at least one person of every
 household of the family was present. Plus:
 
-* The people that usually do the drawing, usually my beautiful mother or one my
-   gracious aunts, often needed to be the 'gamemaster' and know some of the
-   assignments to control for restrictions in the assignment.
-* Having many participants means that some of them ended not being present on
-   the actual Christmas eve for the unwrapping, cheapening the experience a bit.
-   And that the thing itself took too much time, which made the kids cranky.
+- The people that usually do the drawing, usually my beautiful mother or one my
+  gracious aunts, often needed to be the 'gamemaster' and know some of the
+  assignments to control for restrictions in the assignment.
+- Having many participants means that some of them ended not being present on
+  the actual Christmas eve for the unwrapping, cheapening the experience a bit.
+  And that the thing itself took too much time, which made the kids cranky.
 
 Okay, so let's work backwards™️. The main papercuts are:
 
-* Not everyone that usually participated would be present.
-* It's hard to make a draw in person.
-* Too much knowledge on one person about the assignments.
+- Not everyone that usually participated would be present.
+- It's hard to make a draw in person.
+- Too much knowledge on one person about the assignments.
 
 The first point was the harder to solve, on human terms. We are making the
 difficult decision of only allowing the ones present on Dec 24 to participate.
@@ -63,9 +63,9 @@ something like this, at the bare minimum level of detail:
 
 ```ts
 type SecretSantaInput = {
-    people: Set<string>;
-    pools: Set<Set<string>>;
-}
+  people: Set<string>;
+  pools: Set<Set<string>>;
+};
 ```
 
 I put some representative input in a JSON file, imported it, and made the
@@ -75,13 +75,13 @@ of a second, in about 10 iterations.
 
 Which means that in a couple more hours, I added several more features:
 
-* Use [Amazon SES](https://aws.amazon.com/ses/) to send emails to everyone with
+- Use [Amazon SES](https://aws.amazon.com/ses/) to send emails to everyone with
   their assignment. Frugality™️ cause it means I can use my personal account's
   Free Tier allowance and I don't need to figure out how to send SMTP emails via
   my Gmail account.
-* Pool together messages to the same email account, cause older folks will not
+- Pool together messages to the same email account, cause older folks will not
   know how to check their email.
-* Validate input with [zod](https://github.com/colinhacks/zod) to make sure I
+- Validate input with [zod](https://github.com/colinhacks/zod) to make sure I
   don't screw up the input.
 
 And it's done! No frills, exceedingly customer-obsessed™️, and makes my computer

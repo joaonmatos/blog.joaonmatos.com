@@ -20,7 +20,7 @@ guessed it: I had been thinking of starting a blog for almost two years.
 
 The reasons for wanting to start blogging were utterly unremarkable:
 
-## All the cool kids on the developer web do it
+### All the cool kids on the developer web do it
 
 The web is full of really interesting blogs that let you:
 
@@ -39,7 +39,7 @@ Even without these feelings being mixed in, I also noticed that I often knew
 names of people that wrote often about certain topics, and associated them to a
 degree of expertise. This aspect leads us to the next reason:
 
-## It's a content marketing strategy
+### It's a content marketing strategy
 
 Another reason I wanted to start the blog was a more practical one, which was to
 start putting my name out there as a professional in the industry. The reality
@@ -52,7 +52,7 @@ project my personal branding into an image of quality for the product. Blogging
 made sense to me as the more straightforward way to put out content to build up
 that branding.
 
-## I wanted a coherent, shareable, durable, copy of my thoughts
+### I wanted a coherent, shareable, durable, copy of my thoughts
 
 One thing that happens often to me is that I think of something, I want to tell
 someone about it, and I get bogged down communicating it. Often it happens
@@ -73,7 +73,7 @@ discoverability and searchability, and a blog seemed the best option for that.
 
 Which brings us to the roadblock ahead:
 
-# Not-in-House Syndrome: The #1 Dev Blog Killer
+## Not-in-House Syndrome: The #1 Dev Blog Killer
 
 This is the thing that blocked me for two years: wanting to blog for the sake of
 blogging, and thinking "I have to make my own personal everything". It starts
@@ -106,7 +106,7 @@ ever went online.
 
 Which brings me to my solution to this problem:
 
-# Just write _something_
+## Just write _something_
 
 If you want to start your blog, you just need **content**. Literally everything
 else comes naturally afterwards, if your goal is just to get some text online.

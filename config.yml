@@ -16,7 +16,7 @@ minify:
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: "João N. Matos"
-  description: "My name is João Nuno Matos."
+  description: "João's blog"
   keywords: [Blog]
   author: "João N. Matos"
   # author: ["Me", "You"] # multiple authors
@@ -55,7 +55,7 @@ params:
   # home-info mode
   homeInfoParams:
     Title: "Hi there \U0001F44B"
-    Content: "My name is João. Welcome to my blog."
+    Content: "My name is João. I'm a SDE at Amazon Web Services. Welcome to my blog."
 
   socialIcons:
     - name: linkedin
